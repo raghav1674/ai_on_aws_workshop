@@ -13,7 +13,7 @@ def load_aws_credentials(credential_file_path=None):
 
         if path.exists(credential_file_path):
 
-            with open(CREDENTIAL_FILE_PATH) as fp:
+            with open(credential_file_path) as fp:
 
                 reader = csv.reader(fp)
 
