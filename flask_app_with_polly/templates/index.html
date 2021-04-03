@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}" />
+    <title>MY App</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="navbar" action="/">
+            <li class="nav-item"><a href="#" class="nav-link">TEXT TO SPEECH</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <form>
+            <select class="select-item form-control" name="voiceid">
+
+                {% for voice in voices %}
+                <option value={{voice.id}}  {{'selected' if voice.id == voiceid else ''}} >{{voice.Name}} | {{ voice.LanguageName }}</option>
+                {% endfor %}
+            </select>
+
+            <textarea class="form-control"  rows="10"  name="user-text" required>{{ user_text }}</textarea>
+
+            <button class="btn form-control">Speak</button>
+            </button>
+        </form>
+
+        {% if audio %}
+        <embed src="{{ url_for('static',filename='voice/output.mp3') }}" hidden="true" >
+        {% endif %}
+    </div>
+</body>
+
+</html>
