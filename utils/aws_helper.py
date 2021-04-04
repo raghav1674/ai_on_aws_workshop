@@ -77,3 +77,4 @@ def aws_rek_detect_labels(client, bucket_name, key, s3_client=None, create_new=F
         return {'success': 1, 'response': response}
     except Exception as e:
         return {'success': 0, 'response': e}
+

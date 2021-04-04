@@ -2,7 +2,6 @@ import boto3
 import cv2
 
 
-
 SRC_FILE_PATH = r'C:\Users\Raghav Gupta\Downloads\vimal_sir.jfif'
 DEST_FILE_PATH = 'vimal_sir.jpeg'
 

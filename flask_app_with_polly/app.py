@@ -6,6 +6,7 @@ from collections import namedtuple
 from utils.aws_helper import get_aws_service_client
 from flask import Flask, render_template, request
 from random import shuffle
+import time 
 
 
 
@@ -19,7 +20,7 @@ VOICE = namedtuple('Voice', ['id', 'Name', 'LanguageName'])
 VOICES = [VOICE(voice['Id'], voice['Name'], voice['LanguageName'])
           for voice in polly.describe_voices()['Voices']]
 # shuffle(VOICES)
-VOICES.insert(0,VOICE('Aditi','Aditi','Hindi'))
+# VOICES.insert(0,VOICE('Aditi','Aditi','hi-IN'))
 top_ten_random_voices = VOICES[:40]
 
 
@@ -27,7 +28,8 @@ top_ten_random_voices = VOICES[:40]
 
 
 app = Flask(__name__)
-
+# disable the caching by setting its max_age to 0
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route('/', methods=['GET'])
 def index():
@@ -45,7 +47,7 @@ def index():
 
         with open(audio_file_path, 'wb') as music_file:
             music_file.write(audio)
-
+            
     return render_template("index.html", voices=top_ten_random_voices, audio=audio_file_path, user_text=user_text, voiceid=voiceid)
 
 
